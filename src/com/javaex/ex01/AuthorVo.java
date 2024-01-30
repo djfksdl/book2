@@ -12,11 +12,11 @@ public class AuthorVo {
 
 	//생성자
 	public AuthorVo() {
-		super();
+
 	}
 
 	public AuthorVo(int authorId, String authorName, String authorDesc) {
-		super();
+
 		this.authorId = authorId;
 		this.authorName = authorName;
 		this.authorDesc = authorDesc;

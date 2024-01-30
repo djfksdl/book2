@@ -7,30 +7,24 @@ public class BookApp {
 	public static void main(String[] args) {
 		
 		AuthorDao authorDao = new AuthorDao();
-		int cnt = authorDao.authorInsert("이연수", "제주도민");
-		System.out.println("");
+		authorDao.authorInsert("서장훈", "농구선수");
+		authorDao.authorInsert("안정환", "축구선수");
 		
-		authorDao.authorDelete(9);
+		//나중되면 많은 양의 데이터를 넣어야함. 그럼 한덩어리로 넣어야한다. 그래서 밑의 방법을 더 많이 씀
+		
+		AuthorVo authorVo = new AuthorVo("황일영", "개발강사"); // -> 생성자쪽에서 2개짜리 만들어주기
+		authorDao.authorInsert(authorVo);
+		
+		authorDao.authorDelete(26); // 처음에 1이라는 값을 넣었을때 foreign key에러나는 이유는 book에서 쓰고있는데 내가 1번을 지우면 그 책 테이블 1번은 어떻게 하냐. 나는 못지우겠다. -> 해결방법은 안쓰이게 만들면 됨 (26으로 바꿈)
+		authorDao.authorDelete(27);
+		authorDao.authorDelete(28);
 		
 		List<AuthorVo> authorList = authorDao.authorList();
-		//내가 직접 만든다고하면 밑에 같이 되는데 그 역할을 위에 쓴것처럼 한다.  
-		//List<AuthorVo> authorList = new ArratList<AuthorVo>();
-		for(AuthorVo authorVo : authorList) {// 여러개중에 하나를 담는 authorVo,그리고 그걸 따라가면 AuthorVo가 나온다. 
-			int id = authorVo.getAuthorId();
-			String name = authorVo.getAuthorName();
-			String desc = authorVo.getAuthorDesc();
-			System.out.println(id + ", "+ name + ", " + desc);
+		for(AuthorVo vo : authorList) {
+			System.out.println(vo.getAuthorId() + "," 
+							+ vo.getAuthorName() + "," 
+							+ vo.getAuthorDesc());
 		}
-		System.out.println(authorList.size());
-		System.out.println(authorList.toString());
-		
-		/*or(int i = 0; i<authorList.size(); i++) {			
-			int id = authorList.get(i).getAuthorId(); //i번째의 아이디 출력
-			String name = authorList.get(i).getAuthorName();
-			String desc = authorList.get(i).getAuthorDesc();
-			System.out.println(id + ", "+ name + ", " + desc);
-		}*/
-		
 		
 	}
 
